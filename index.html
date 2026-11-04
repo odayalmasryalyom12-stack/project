@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع أنت أهم عندنا - مدرسة الدكتور محمد حسن الزيات</title>
+    <style>
+        :root {
+            --primary-orange: #ff6f20;
+            --light-orange: #fff4ed;
+            --border-orange: #ffb088;
+            --dark-text: #333333;
+            --bg-offwhite: #fffaf7;
+        }
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; }
+        body { background-color: var(--light-orange); color: var(--dark-text); margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column; }
+        header { background: linear-gradient(135deg, #ff6f20, #e65c00); color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); flex-wrap: wrap; gap: 10px; }
+        .header-title h1 { margin: 0; font-size: 22px; }
+        .header-title p { margin: 3px 0 0 0; font-size: 13px; opacity: 0.9; }
+        .header-buttons { display: flex; gap: 10px; align-items: center; }
+        .vip-btn-top { background: #fff; color: var(--primary-orange); border: 2px solid #fff; padding: 6px 14px; border-radius: 15px; font-weight: bold; cursor: pointer; font-size: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); transition: 0.2s; text-decoration: none; }
+        .vip-btn-top:hover { background: var(--light-orange); }
+        .wa-btn-top { background: #25D366; color: white; border: 2px solid #25D366; padding: 6px 14px; border-radius: 15px; font-weight: bold; cursor: pointer; font-size: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); transition: 0.2s; text-decoration: none; }
+        .wa-btn-top:hover { background: #1eb856; }
+        .supervisors-box { background: rgba(255, 255, 255, 0.15); padding: 8px 12px; border-radius: 8px; font-size: 11px; line-height: 1.5; border: 1px solid rgba(255,255,255,0.3); text-align: right; }
+        nav { background: #ffffff; display: flex; justify-content: center; gap: 10px; padding: 10px; border-bottom: 2px solid var(--border-orange); box-shadow: 0 2px 4px rgba(0,0,0,0.03); flex-wrap: wrap; }
+        nav button { background: var(--bg-offwhite); border: 1px solid var(--border-orange); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: bold; color: var(--primary-orange); transition: all 0.3s ease; }
+        nav button:hover, nav button.active { background: var(--primary-orange); color: white; }
+        .container { max-width: 1000px; margin: 20px auto; padding: 0 15px; flex: 1; width: 100%; }
+        .section { display: none; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(255, 111, 32, 0.08); border: 1px solid var(--border-orange); }
+        .section.active { display: block; }
+        h2 { color: var(--primary-orange); border-bottom: 2px solid var(--light-orange); padding-bottom: 8px; margin-top: 0; }
+        .grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; margin-top: 15px; }
+        .card { background: var(--bg-offwhite); border: 1px solid var(--border-orange); border-radius: 8px; padding: 15px; transition: transform 0.2s; position: relative; }
+        .card:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(255,111,32,0.12); }
+        .card h4 { margin: 0 0 8px 0; color: #d35400; font-size: 16px; }
+        .card p { font-size: 13px; line-height: 1.6; margin: 0; color: #444; }
+        .whatsapp-card-btn { display: inline-block; background-color: #25D366; color: white; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 14px; margin-top: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.15); }
+        .video-btn { background: #e74c3c; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 10px; width: 100%; font-weight: bold; }
+        .delete-btn { position: absolute; top: 8px; left: 8px; background: #c0392b; color: white; border: none; padding: 2px 6px; font-size: 10px; border-radius: 3px; cursor: pointer; }
+        #videoModal, #vipModal, #adminPanelModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 9999; }
+        .video-modal-content { background: #111; padding: 20px; border-radius: 10px; width: 90%; max-width: 650px; text-align: center; color: white; border: 2px solid var(--primary-orange); }
+        .modal-content { background: white; padding: 25px; border-radius: 12px; width: 400px; border: 3px solid var(--primary-orange); box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: right; }
+        .modal-content input, .modal-content textarea, .modal-content select { width: 100%; padding: 8px; margin: 6px 0 12px 0; border: 1px solid #ccc; border-radius: 6px; }
+        .btn-main { background: var(--primary-orange); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 5px; }
+        footer { text-align: center; padding: 15px; background: #fff; border-top: 1px solid var(--border-orange); font-size: 12px; color: #777; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title">
+            <h1>موقع أنت أهم عندنا</h1>
+            <p>مدرسة الدكتور محمد حسن الزيات - المنصة التوعوية الشاملة</p>
+        </div>
+        <div class="header-buttons">
+            <a href="https://chat.whatsapp.com/KxuruJdcn1QG611elPgT2G" target="_blank" class="wa-btn-top">💬 جروب الواتساب</a>
+            <button class="vip-btn-top" onclick="openVipModal()">⭐ VIP</button>
+        </div>
+        <div class="supervisors-box">
+            <b>إشراف مدير المدرسة:</b> أستاذ محمد عمر<br>
+            <b>إشراف:</b> أستاذة همت صادق<br>
+            <b>تنفيذ:</b> عدي جمال دنيور & مروان محمد منصور
+        </div>
+    </header>
+
+    <nav>
+        <button onclick="switchTab('home')" class="active">الرئيسية</button>
+        <button onclick="switchTab('news')">أخبار مهمة</button>
+        <button onclick="switchTab('bullying')">سلسلة التنمر</button>
+        <button onclick="switchTab('smoking')">التدخين وأضراره</button>
+        <button onclick="switchTab('harassment')">التوعية والتحرش</button>
+        <button onclick="switchTab('about')">حكايتنا (من نحن)</button>
+    </nav>
+
+    <div class="container">
+
+        <!-- الرئيسية -->
+        <div id="home" class="section active">
+            <h2>مرحباً بكم في منصة التوعية المدرسية</h2>
+            <p>تهدف هذه المنصة إلى نشر الوعي المجتمعي والصحي والأخلاقي لدى الطلاب من خلال منشورات وحلقات توعوية متكاملة وأخبار حصرية.</p>
+            <div class="card" style="margin-top: 20px; border-color: var(--primary-orange); background: var(--light-orange);">
+                <h3>🌟 أهدافنا التربوية</h3>
+                <p>توفير بيئة مدرسية آمنة، واعية، وخالية من السلوكيات السلبية عبر محتوى مرئي وثقافي متميز يخدم طلاب مدرسة الدكتور محمد حسن الزيات.</p>
+            </div>
+        </div>
+
+        <!-- الأخبار -->
+        <div id="news" class="section">
+            <h2>📰 أخبار مهمة والتحديثات</h2>
+            <div id="news-container" class="grid-cards">
+                <div class="card" style="border: 2px solid var(--primary-orange); grid-column: 1 / -1; background: #fffdfb;">
+                    <h4 style="color: var(--primary-orange); font-size: 18px;">📢 الإعلان الرسمي وجروب التحديثات</h4>
+                    <p>مرحباً بكم في الموقع الرسمي لمبادرة "أنت أهم عندنا" بمدرسة الدكتور محمد حسن الزيات. تابعونا للانضمام لجروب الواتساب الرسمي:</p>
+                    <div style="margin-top: 15px;">
+                        <a href="https://chat.whatsapp.com/KxuruJdcn1QG611elPgT2G" target="_blank" class="whatsapp-card-btn">📲 الانضمام لجروب الواتساب الرسمي</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- التنمر -->
+        <div id="bullying" class="section">
+            <h2>🛑 سلسلة التنمر (حلقات توعوية)</h2>
+            <div class="grid-cards" id="bullying-list">
+                <div class="card">
+                    <h4>الحلقة الأولى (دروس التنمر الأساسية)</h4>
+                    <p>فيديو توعوي شامل لمكافحة التنمر المدرسي وكيفية التعامل معه.</p>
+                    <button class="video-btn" onclick="openVideo('الحلقة الأولى: التنمر', 'https://www.youtube.com/watch?v=PL5T5urjo_A')">▶ تشغيل الفيديو</button>
+                </div>
+                <div class="card">
+                    <h4>الحلقة الثانية (التنمر والتوعية النفسية)</h4>
+                    <p>درس توعوي هام لحماية الطلاب ودعم الزملاء.</p>
+                    <button class="video-btn" onclick="openVideo('الحلقة الثانية: التوعية من التنمر', 'https://www.youtube.com/watch?v=BTdXKliH5vY')">▶ تشغيل الفيديو</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- التدخين -->
+        <div id="smoking" class="section">
+            <h2>🚭 سلسلة أضرار التدخين</h2>
+            <div class="grid-cards" id="smoking-list">
+                <div class="card">
+                    <h4>حلقة أضرار التدخين (1)</h4>
+                    <p>التوعية بمخاطر التدخين المدمرة على صحة الإنسان والجهاز التنفسي.</p>
+                    <button class="video-btn" onclick="openVideo('حلقة أضرار التدخين (1)', 'https://www.youtube.com/watch?v=BbIdvAsw7Pw')">▶ تشغيل الفيديو</button>
+                </div>
+                <div class="card">
+                    <h4>حلقة أضرار التدخين (2)</h4>
+                    <p>كيفية الوقاية من رفقاء السوء والابتعاد عن العادات السيئة.</p>
+                    <button class="video-btn" onclick="openVideo('حلقة أضرار التدخين (2)', 'https://www.youtube.com/watch?v=Re5Vv0KUUVM')">▶ تشغيل الفيديو</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- التحرش -->
+        <div id="harassment" class="section">
+            <h2>🛡️ سلسلة التوعية والحماية</h2>
+            <div class="grid-cards" id="harassment-list">
+                <div class="card">
+                    <h4>حلقة التوعية والحماية الذاتية (1)</h4>
+                    <p>تعلم كيفية حماية الحدود الشخصية والإبلاغ الفوري عند التعرض لأي خطر.</p>
+                    <button class="video-btn" onclick="openVideo('حلقة الحماية والتوعية (1)', 'https://www.youtube.com/watch?v=ZC2adI76XR0')">▶ تشغيل الفيديو</button>
+                </div>
+                <div class="card">
+                    <h4>حلقة التوعية والحماية الذاتية (2)</h4>
+                    <p>إرشادات تربوية وأمان شامل لجميع الطلاب داخل وخارج المدرسة.</p>
+                    <button class="video-btn" onclick="openVideo('حلقة الحماية والتوعية (2)', 'https://www.youtube.com/watch?v=nCqRZbPvdCY')">▶ تشغيل الفيديو</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- حكايتنا -->
+        <div id="about" class="section" style="text-align: center;">
+            <h2>حكايتنا (من نحن)</h2>
+            <p style="max-width: 800px; margin: 15px auto; line-height: 1.8; text-align: justify; font-size: 14px;">
+                بدأت قصة هذا المشروع الرائع منذ أن كنا صغاراً؛ حيث تجمعنا شغفٌ كبير ومبكر بعالم الكمبيوتر وتكنولوجيا المعلومات وبرمجة المواقع. كنا نقضي الساعات الطويلة نتخيل كيف تُبنى التطبيقات وكيف يمكننا تصميم منصات رقمية تفيد مجتمعنا ومدرستنا الحبيبة (مدرسة الدكتور محمد حسن الزيات). بفضل الله، وبتشجيع ودعم كبير من أساتذتنا الأفاضل، تحولت تلك الأحلام البسيطة التي بدأناها في طفولتنا إلى حقيقة ملموسة عبر هذا التطبيق التوعوي المتكامل. لقد تعاونّا معاً – نحن الصديقان عدي جمال دنيور ومروان محمد منصور – في كتابة الأكواد وتصميم الواجهات البرمجية لنقدم هذه المنصة الفريدة التي تخدم أبناءنا الطلاب في نشر التوعية والأخلاق الحميدة. نؤمن تماماً أن التكنولوجيا هي مفتاح المستقبل، ونسعى دائماً لتقديم الأفضل لخدمة مدرستنا ووطننا الحبيب مصر.
+            </p>
+            <div style="display: flex; gap: 20px; justify-content: center; margin-top: 25px; flex-wrap: wrap;">
+                <div class="card" style="width: 220px;">
+                    <div style="background: #ddd; height: 120px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; border-radius: 4px;">صورة عدي</div>
+                    <b>عدي جمال دنيور</b>
+                </div>
+                <div class="card" style="width: 220px;">
+                    <div style="background: #ddd; height: 120px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; border-radius: 4px;">صورة مروان</div>
+                    <b>مروان محمد منصور</b>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- مشغل الفيديوهات -->
+    <div id="videoModal">
+        <div class="video-modal-content">
+            <h3 id="videoTitleModal" style="margin-top:0; color:#ffb088;">عنوان الحلقة</h3>
+            <div style="margin: 15px 0;" id="iframeContainer"></div>
+            <button onclick="closeVideoModal()" style="background:#e74c3c; color:white; border:none; padding:8px 20px; border-radius:4px; cursor:pointer; font-weight:bold;">إغلاق المشغل</button>
+        </div>
+    </div>
+
+    <!-- نافذة تسجيل VIP -->
+    <div id="vipModal">
+        <div class="modal-content" style="text-align: center;">
+            <h3>⭐ تسجيل دخول قائمة الـ VIP</h3>
+            <p style="font-size: 12px; color: #666;">أدخل اسم المستخدم وكلمة المرور</p>
+            <input type="text" id="vipUser" placeholder="اسم المستخدم" style="text-align:right;">
+            <input type="password" id="vipPass" placeholder="كلمة المرور" style="text-align:right;">
+            <button class="btn-main" onclick="verifyVipLogin()">دخول</button>
+            <button onclick="closeVipModal()" style="background: #ccc; border:none; padding:6px; width:100%; margin-top:5px; border-radius:6px; cursor:pointer;">إلغاء</button>
+        </div>
+    </div>
+
+    <!-- لوحة تحكم المشرف -->
+    <div id="adminPanelModal">
+        <div class="modal-content">
+            <h3 style="color:var(--primary-orange); margin-top:0;">🛠️ لوحة تحكم المشرف VIP</h3>
+            <label>اختر القسم:</label>
+            <select id="contentType">
+                <option value="news">خبر جديد</option>
+                <option value="bullying">حلقة في التنمر</option>
+                <option value="smoking">حلقة في التدخين</option>
+                <option value="harassment">حلقة في التحرش</option>
+            </select>
+            <label>العنوان:</label>
+            <input type="text" id="newTitleInput" placeholder="اكتب العنوان...">
+            <label>التفاصيل أو رابط يوتيوب:</label>
+            <textarea id="newDescInput" rows="3" placeholder="التفاصيل أو رابط الفيديو..."></textarea>
+            <button class="btn-main" onclick="addNewContent()">إضافة ونشر محلياً +</button>
+            <button onclick="closeAdminPanel()" style="background: #e74c3c; color:white; border:none; padding:6px; width:100%; margin-top:8px; border-radius:6px; cursor:pointer;">إغلاق</button>
+        </div>
+    </div>
+
+    <footer>جميع الحقوق محفوظة لمدرسة الدكتور محمد حسن الزيات © 2026</footer>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function getEmbedUrl(url) {
+            if (!url) return "https://www.youtube.com/embed/3JZ_D3ELwOQ";
+            let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            let match = url.match(regExp);
+            let videoId = (match && match[2].length === 11) ? match[2] : "3JZ_D3ELwOQ";
+            return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        }
+
+        function openVideo(title, url) {
+            document.getElementById('videoTitleModal').innerText = title;
+            let embed = getEmbedUrl(url);
+            document.getElementById('iframeContainer').innerHTML = `
+                <iframe width="100%" height="340" src="${embed}" title="${title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:6px;"></iframe>
+            `;
+            document.getElementById('videoModal').style.display = 'flex';
+        }
+
+        function closeVideoModal() {
+            document.getElementById('iframeContainer').innerHTML = '';
+            document.getElementById('videoModal').style.display = 'none';
+        }
+
+        // تحميل الأخبار المحفوظة محلياً لو أضيفت من لوحة التحكم
+        let customNews = JSON.parse(localStorage.getItem('my_news')) || [];
+        if(customNews.length > 0) {
+            let nc = document.getElementById('news-container');
+            customNews.forEach(item => {
+                nc.innerHTML += `<div class="card" style="border: 2px solid var(--primary-orange);"><h4>${item.title}</h4><p>${item.desc}</p></div>`;
+            });
+        }
+
+        function openVipModal() { document.getElementById('vipModal').style.display = 'flex'; }
+        function closeVipModal() { document.getElementById('vipModal').style.display = 'none'; }
+
+        let vipUsers = [
+            {user: "2016", pass: "0925", name: "المبرمج عدي ومروان"},
+            {user: "115007", pass: "160508", name: "أستاذ محمد عمر"},
+            {user: "115008", pass: "160509", name: "أستاذة همت صادق"}
+        ];
+
+        function verifyVipLogin() {
+            let u = document.getElementById('vipUser').value;
+            let p = document.getElementById('vipPass').value;
+            let found = vipUsers.find(x => x.user === u && x.pass === p);
+            if (found) {
+                closeVipModal();
+                document.getElementById('adminPanelModal').style.display = 'flex';
+                alert("مرحباً بك يا " + found.name + "!");
+            } else {
+                alert("خطأ في البيانات!");
+            }
+        }
+
+        function closeAdminPanel() { document.getElementById('adminPanelModal').style.display = 'none'; }
+
+        function addNewContent() {
+            let title = document.getElementById('newTitleInput').value;
+            let desc = document.getElementById('newDescInput').value;
+            if(!title || !desc) { alert("أدخل الحقول!"); return; }
+            customNews.push({title, desc});
+            localStorage.setItem('my_news', JSON.stringify(customNews));
+            alert("تم النشر بنجاح!");
+            location.reload();
+        }
+    </script>
+</body>
+</html>
